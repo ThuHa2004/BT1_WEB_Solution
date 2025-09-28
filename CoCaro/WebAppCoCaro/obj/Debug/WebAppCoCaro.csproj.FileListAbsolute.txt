@@ -1,0 +1,10 @@
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\bin\WebAppCoCaro.dll.config
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\bin\WebAppCoCaro.dll
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\bin\WebAppCoCaro.pdb
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\bin\Library_CoCaro.dll
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\bin\Library_CoCaro.pdb
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\obj\Debug\WebAppCoCaro.csproj.AssemblyReference.cache
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\obj\Debug\WebAppCoCaro.csproj.CoreCompileInputs.cache
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\obj\Debug\WebAppCo.12CC6710.Up2Date
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\obj\Debug\WebAppCoCaro.dll
+D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro\obj\Debug\WebAppCoCaro.pdb

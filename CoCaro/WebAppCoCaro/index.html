@@ -1,0 +1,664 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Tile Triple Match - Game Xếp Hình Siêu Đẹp 🎮</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+            /* Hiệu ứng background động */
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+                animation: backgroundFlow 20s ease-in-out infinite;
+                z-index: -1;
+            }
+
+        @keyframes backgroundFlow {
+            0%, 100% {
+                background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            }
+
+            50% {
+                background: radial-gradient(circle at 80% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 60% 60%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 182, 255, 0.4), 0 0 40px rgba(255, 182, 255, 0.3);
+            margin-bottom: 30px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 182, 255, 0.4), 0 0 40px rgba(255, 182, 255, 0.3);
+            }
+
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 182, 255, 0.6), 0 0 60px rgba(255, 182, 255, 0.5);
+            }
+        }
+
+        #gameCanvas {
+            border: 4px solid transparent;
+            background: linear-gradient(white, white) padding-box, linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7) border-box;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            display: block;
+            margin: 0 auto;
+        }
+
+            #gameCanvas:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+
+        .controls {
+            margin: 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-right: 10px;
+        }
+
+        select, button {
+            padding: 12px 24px;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        select {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+            select:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            }
+
+        button {
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #btnStart {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        #btnRestart {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        #btnPause {
+            background: linear-gradient(135deg, #ffc371 0%, #ff5f6d 100%);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: linear-gradient(135deg, #bdc3c7 0%, #95a5a6 100%);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #status {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 20px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .cell-size {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Modal Styles - Siêu lung linh */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: modalSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+            .modal-close:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+                background: linear-gradient(135deg, #ee5a52 0%, #ff6b6b 100%);
+            }
+
+        /* Hiệu ứng particle floating */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+            .particle:nth-child(odd) {
+                animation-duration: 8s;
+                animation-delay: -2s;
+            }
+
+            .particle:nth-child(even) {
+                animation-duration: 10s;
+                animation-delay: -4s;
+            }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+
+            .control-group {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            #gameCanvas {
+                max-width: 90vw;
+                height: auto;
+            }
+        }
+
+        /* Score display - đã xóa */
+
+        /* Game info panel - đã xóa */
+    </style>
+</head>
+<body>
+    <!-- Floating particles for extra magic -->
+    <div class="particle" style="top: 10%; left: 10%; width: 8px; height: 8px; background: #ff6b6b;"></div>
+    <div class="particle" style="top: 20%; left: 80%; width: 12px; height: 12px; background: #4ecdc4;"></div>
+    <div class="particle" style="top: 60%; left: 5%; width: 6px; height: 6px; background: #ffeaa7;"></div>
+    <div class="particle" style="top: 70%; left: 90%; width: 10px; height: 10px; background: #a29bfe;"></div>
+    <div class="particle" style="top: 30%; left: 70%; width: 8px; height: 8px; background: #fd79a8;"></div>
+    <div class="particle" style="top: 80%; left: 20%; width: 14px; height: 14px; background: #00b894;"></div>
+
+    <div class="container">
+        <h1>🎮 Tile Triple Match 🎮<br><span style="font-size: 0.6em; color: #ffeaa7;">Siêu Phẩm Xếp Hình!</span></h1>
+
+
+
+        <div class="controls">
+            <div class="control-group">
+                <label>🎯 Chế độ:</label>
+                <select id="modeSelect">
+                    <option value="1">🤖 Bot vs Người</option>
+                    <option value="2">👥 2 Người</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <button id="btnStart">🚀 Bắt Đầu</button>
+                <button id="btnRestart">🔄 Chơi Lại</button>
+                <button id="btnPause">⏸️ Tạm Dừng</button>
+            </div>
+        </div>
+
+        <div id="status">🎲 Vui lòng nhấn 'Bắt Đầu' để chơi game siêu đỉnh!</div>
+
+        <canvas id="gameCanvas" width="500" height="500"></canvas>
+
+        <div style="margin-top: 30px; color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+            ✨ Made with ❤️ by TranThiThuHa - K58KTP - Vietnam 🇻🇳 ✨
+        </div>
+    </div>
+
+    <!-- Modal thông báo chiến thắng siêu đẹp -->
+    <div id="winModal" class="modal">
+        <div class="modal-content">
+            <div style="font-size: 3rem; margin-bottom: 20px;">🎉</div>
+            <span id="winMessage"></span>
+            <div style="font-size: 2rem; margin-top: 15px;">🏆</div>
+            <button class="modal-close" onclick="closeModal()">🎮 Chơi Tiếp</button>
+        </div>
+    </div>
+
+    <script>
+        let canvas = document.getElementById('gameCanvas');
+        let ctx = canvas.getContext('2d');
+        let gameStarted = false;
+        let isPaused = false;
+        let currentMode = 1;
+        let board = Array(20).fill().map(() => Array(20).fill(0));
+        let currentPlayer = 1;
+        let gameEnded = false;
+        let botIsThinking = false; // Thêm flag để ngăn bot đi nhiều lần
+        const CELL_SIZE = 25;
+
+        // Cập nhật hiển thị điểm số - function giữ lại để tránh lỗi
+        function updateScoreDisplay(score = 0, moves = 0, level = 1) {
+            // Không cần hiển thị gì cả
+        }
+
+        function drawBoard(boardData) {
+            board = boardData || board;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Gradient background cho canvas
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#f8f9ff');
+            gradient.addColorStop(1, '#e8f5ff');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Vẽ lưới với hiệu ứng đẹp
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 1;
+            ctx.shadowColor = 'rgba(102, 126, 234, 0.3)';
+            ctx.shadowBlur = 2;
+
+            for (let i = 0; i <= 20; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, i * CELL_SIZE);
+                ctx.lineTo(20 * CELL_SIZE, i * CELL_SIZE);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(i * CELL_SIZE, 0);
+                ctx.lineTo(i * CELL_SIZE, 20 * CELL_SIZE);
+                ctx.stroke();
+            }
+
+            ctx.shadowBlur = 0;
+
+            for (let i = 0; i < 20; i++) {
+                for (let j = 0; j < 20; j++) {
+                    if (board[i][j] === 1) {
+                        // X đẹp hơn với gradient
+                        const gradient = ctx.createLinearGradient(j * CELL_SIZE, i * CELL_SIZE, (j + 1) * CELL_SIZE, (i + 1) * CELL_SIZE);
+                        gradient.addColorStop(0, '#ff6b6b');
+                        gradient.addColorStop(1, '#ee5a52');
+                        ctx.fillStyle = gradient;
+                        ctx.font = 'bold 16px Arial';
+                        ctx.shadowColor = 'rgba(238, 90, 82, 0.5)';
+                        ctx.shadowBlur = 4;
+                        ctx.fillText('✕', j * CELL_SIZE + 7, i * CELL_SIZE + 18);
+                        ctx.shadowBlur = 0;
+                    } else if (board[i][j] === 2) {
+                        // O đẹp hơn với gradient
+                        const gradient = ctx.createLinearGradient(j * CELL_SIZE, i * CELL_SIZE, (j + 1) * CELL_SIZE, (i + 1) * CELL_SIZE);
+                        gradient.addColorStop(0, '#4ecdc4');
+                        gradient.addColorStop(1, '#44a08d');
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 3;
+                        ctx.shadowColor = 'rgba(78, 205, 196, 0.5)';
+                        ctx.shadowBlur = 4;
+                        ctx.beginPath();
+                        ctx.arc(j * CELL_SIZE + 12.5, i * CELL_SIZE + 12.5, 8, 0, 2 * Math.PI);
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+                }
+            }
+        }
+
+        function makeMove(row, col) {
+            // Đảm bảo gửi đúng chế độ game
+            console.log(`Making move: mode=${currentMode}, row=${row}, col=${col}, currentPlayer=${currentPlayer}, botIsThinking=${botIsThinking}`);
+
+            fetch(`api.aspx?action=move&mode=${currentMode}&row=${row}&col=${col}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        board = data.board;
+                        let previousPlayer = currentPlayer;
+                        currentPlayer = data.currentPlayer;
+                        gameEnded = data.gameEnded;
+                        drawBoard();
+                        updateScoreDisplay(data.score || 0, data.moves || 0, data.level || 1);
+
+                        if (data.result !== 'Tiep tuc') {
+                            showWinModal(data.result);
+                        } else {
+                            document.getElementById('status').textContent = `🎯 Đã đánh tại (${row}, ${col}) - Lượt của ${currentPlayer === 1 ? '✕' : '○'}`;
+
+                            // CHỈ gọi bot khi:
+                            // 1. Ở chế độ Bot vs Người (mode=1)
+                            // 2. Người vừa đánh (previousPlayer=1) và giờ là lượt bot (currentPlayer=2)
+                            // 3. Bot chưa đang suy nghĩ
+                            // 4. Game chưa kết thúc
+                            // 5. Row/col >= 0 (tức là người thật đánh, không phải bot)
+                            if (currentMode === 1 && row >= 0 && col >= 0 && previousPlayer === 1 && currentPlayer === 2 && !botIsThinking && !gameEnded) {
+                                botIsThinking = true;
+                                setTimeout(() => {
+                                    botMove();
+                                }, 800);
+                            }
+                        }
+                    } else {
+                        document.getElementById('status').textContent = '❌ Nước đi không hợp lệ!';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('status').textContent = '🔌 Lỗi kết nối tới server!';
+                });
+        }
+
+        function botMove() {
+            // Chỉ gọi bot move khi ở chế độ 1 (Bot vs Người) và bot đang được phép suy nghĩ
+            if (currentMode !== 1 || !botIsThinking) {
+                console.log('Bot move cancelled:', { currentMode, botIsThinking });
+                return;
+            }
+
+            console.log('Bot making move...');
+            fetch(`api.aspx?action=move&mode=${currentMode}&row=-1&col=-1`)
+                .then(response => response.json())
+                .then(data => {
+                    botIsThinking = false; // Reset flag khi bot đã đánh xong
+
+                    if (data.success) {
+                        board = data.board;
+                        currentPlayer = data.currentPlayer;
+                        gameEnded = data.gameEnded;
+                        drawBoard();
+                        updateScoreDisplay(data.score || 0, data.moves || 0, data.level || 1);
+                        if (data.result !== 'Tiep tuc') {
+                            showWinModal(data.result);
+                        } else {
+                            document.getElementById('status').textContent = '🤖 Bot đã đánh - Lượt của ✕';
+                        }
+                    } else {
+                        document.getElementById('status').textContent = '🤖 Bot không thể đánh!';
+                    }
+                })
+                .catch(error => {
+                    botIsThinking = false; // Reset flag khi có lỗi
+                    console.error('Error:', error);
+                    document.getElementById('status').textContent = '🔌 Lỗi kết nối tới server!';
+                });
+        }
+
+        function resetGame() {
+            fetch(`api.aspx?action=reset&mode=${currentMode}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        board = data.board;
+                        currentPlayer = data.currentPlayer;
+                        gameEnded = data.gameEnded;
+                        botIsThinking = false; // Reset bot flag khi reset game
+                        document.getElementById('status').textContent = '🎮 Trò chơi đã reset! Lượt của ✕';
+                        drawBoard();
+                        updateScoreDisplay(0, 0, 1);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('status').textContent = '❌ Lỗi reset game!';
+                });
+        }
+
+        function showWinModal(result) {
+            let winMessage = document.getElementById('winMessage');
+            if (result === 'X thang!') {
+                winMessage.innerHTML = '🎊 Chúc mừng!<br>Người chơi ✕ đã chiến thắng! 🏆';
+            } else if (result === 'O thang!') {
+                winMessage.innerHTML = '🎊 Chúc mừng!<br>Người chơi ○ đã chiến thắng! 🏆';
+            } else if (result === 'Hoa!') {
+                winMessage.innerHTML = '🤝 Trận đấu hòa!<br>Cả hai đều rất giỏi! 🌟';
+            } else {
+                winMessage.innerHTML = '🎮 Game Over! 🎯';
+            }
+            document.getElementById('winModal').style.display = 'block';
+            setTimeout(() => {
+                closeModal();
+                resetGame();
+            }, 5000);
+        }
+
+        function closeModal() {
+            document.getElementById('winModal').style.display = 'none';
+            gameEnded = false;
+        }
+
+        canvas.addEventListener('click', function (e) {
+            if (!gameStarted || gameEnded || isPaused) {
+                document.getElementById('status').textContent = !gameStarted ? "🎯 Vui lòng nhấn 'Bắt Đầu' để chơi!" : (gameEnded ? "🎮 Game kết thúc! Nhấn 'Chơi lại' để tiếp tục." : "⏸️ Đã tạm dừng! Nhấn 'Tiếp tục' để chơi tiếp.");
+                return;
+            }
+
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const row = Math.floor(y / CELL_SIZE);
+            const col = Math.floor(x / CELL_SIZE);
+
+            if (row >= 0 && row < 20 && col >= 0 && col < 20 && board[row][col] === 0) {
+                makeMove(row, col);
+
+                // Chỉ gọi bot move sau khi người chơi đi và ở chế độ Bot vs Người
+                if (currentMode === 1 && !gameEnded) {
+                    setTimeout(() => {
+                        botMove();
+                    }, 500); // Delay 500ms cho bot
+                }
+            } else {
+                document.getElementById('status').textContent = '🎯 Vui lòng chọn ô trống!';
+            }
+        });
+
+        document.getElementById('btnStart').addEventListener('click', function () {
+            currentMode = parseInt(document.getElementById('modeSelect').value);
+            gameStarted = true;
+            isPaused = false;
+            gameEnded = false;
+            document.getElementById('btnPause').innerHTML = '⏸️ Tạm Dừng';
+            document.getElementById('status').textContent = '🚀 Trò chơi bắt đầu! Lượt của ✕';
+            resetGame();
+        });
+
+        document.getElementById('btnRestart').addEventListener('click', function () {
+            if (!gameStarted) {
+                document.getElementById('status').textContent = "🎯 Vui lòng nhấn 'Bắt Đầu' trước!";
+                return;
+            }
+            resetGame();
+            isPaused = false;
+            document.getElementById('btnPause').innerHTML = '⏸️ Tạm Dừng';
+            document.getElementById('status').textContent = '🔄 Trò chơi đã reset! Lượt của ✕';
+        });
+
+        document.getElementById('btnPause').addEventListener('click', function () {
+            if (!gameStarted || gameEnded) return;
+            isPaused = !isPaused;
+            document.getElementById('btnPause').innerHTML = isPaused ? '▶️ Tiếp Tục' : '⏸️ Tạm Dừng';
+            document.getElementById('status').textContent = isPaused ? "⏸️ Đã tạm dừng! Nhấn 'Tiếp Tục' để chơi tiếp." : `🎯 Lượt của ${currentPlayer === 1 ? '✕' : '○'}`;
+        });
+
+        // Khởi tạo canvas
+        drawBoard();
+        updateScoreDisplay();
+    </script>
+</body>
+</html>
