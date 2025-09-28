@@ -111,4 +111,29 @@ Cũng giống như các bước tạo project Class Library
   <img width="1914" height="1018" alt="image" src="https://github.com/user-attachments/assets/3135d14c-d642-4992-b2dc-77deae32ccb4" />  
 
 ## 5. Cấu hình IIS
+### Các bước cài đặt và cấu hình IIS
+- Mở control Panel -> Programes -> Turn Windows features on or off -> Tick Internet Information Services -> OK
+- Mở IIS Manager -> Click chuột phải vào Sites -> Add website...
+  <img width="1410" height="422" alt="Screenshot 2025-09-28 230655" src="https://github.com/user-attachments/assets/3d73ad50-2059-4dcc-be06-7349b0ca3d3c" />
+#### Đặt:
+  - Sitename:GameCoCaro
+  - Physiscal path: D:\BAITAP\BT_LTWEB\CoCaro\WebAppCoCaro
+  - Binding path: Type: http; IP Address: ALL Unassigned; Port: 80 
+  - Hostname:gamecocaro.com
+  <img width="834" height="889" alt="image" src="https://github.com/user-attachments/assets/6b659c27-765a-4761-a3f9-3658ab78a318" />
+####Thêm Domain vào file hosts:
+  - Mở nodepad và chọn Run as Administrator
+  - Openfile: C:\Windows\System32\drivers\etc
+  - Tạo domain local: 127.0.0.1 gamecocaro.com
+  <img width="1171" height="759" alt="image" src="https://github.com/user-attachments/assets/54652255-df3a-4ac5-b24d-f4fd4e340f0b" />
+#### Cấu hình Application Pool
+- Mở IIS -> Application Pool
+- Tìm đến Application Pool vừa tạo WebAppCoCaro
+- Chuột phải -> Basic Settings, .NET chọn v2.0 
+  <img width="1524" height="793" alt="image" src="https://github.com/user-attachments/assets/206facfa-49ab-4fb7-8a64-928540eafee1" />
+- Phải đảm bảo trong thư mục WepAppCoCaro\bin có file DLL của 2 project 1 và 4 để chạy chương trình.
+- Mở trình duyệt và tìm http://gamecocaro.com để chạy lên web.
+#### Kết quả 
+  <img width="1917" height="1011" alt="image" src="https://github.com/user-attachments/assets/072f1aa6-33a0-49fe-92f8-4ca574f825c5" />
 
+# HẾT!
