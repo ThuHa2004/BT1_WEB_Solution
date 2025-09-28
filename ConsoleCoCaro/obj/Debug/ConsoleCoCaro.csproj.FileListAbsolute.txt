@@ -1,0 +1,9 @@
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\bin\Debug\ConsoleCoCaro.exe
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\bin\Debug\ConsoleCoCaro.pdb
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\bin\Debug\Library_CoCaro.dll
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\bin\Debug\Library_CoCaro.pdb
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\obj\Debug\ConsoleCoCaro.csproj.AssemblyReference.cache
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\obj\Debug\ConsoleCoCaro.csproj.CoreCompileInputs.cache
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\obj\Debug\ConsoleC.D801C160.Up2Date
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\obj\Debug\ConsoleCoCaro.exe
+D:\BAITAP\BT_LTWEB\CoCaro\ConsoleCoCaro\obj\Debug\ConsoleCoCaro.pdb
