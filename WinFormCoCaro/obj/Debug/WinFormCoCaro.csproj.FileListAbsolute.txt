@@ -1,0 +1,12 @@
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\bin\Debug\WinFormCoCaro.exe
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\bin\Debug\WinFormCoCaro.pdb
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\bin\Debug\Library_CoCaro.dll
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\bin\Debug\Library_CoCaro.pdb
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormCoCaro.csproj.AssemblyReference.cache
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormCoCaro.Form1.resources
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormCoCaro.Properties.Resources.resources
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormCoCaro.csproj.GenerateResource.cache
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormCoCaro.csproj.CoreCompileInputs.cache
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormC.E0F9AEAE.Up2Date
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormCoCaro.exe
+D:\BAITAP\BT_LTWEB\CoCaro\WinFormCoCaro\obj\Debug\WinFormCoCaro.pdb
