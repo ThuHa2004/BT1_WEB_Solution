@@ -1,0 +1,6 @@
+D:\BAITAP\BT_LTWEB\CoCaro\Library_CoCaro\bin\Debug\Library_CoCaro.dll
+D:\BAITAP\BT_LTWEB\CoCaro\Library_CoCaro\bin\Debug\Library_CoCaro.pdb
+D:\BAITAP\BT_LTWEB\CoCaro\Library_CoCaro\obj\Debug\Library_CoCaro.csproj.AssemblyReference.cache
+D:\BAITAP\BT_LTWEB\CoCaro\Library_CoCaro\obj\Debug\Library_CoCaro.csproj.CoreCompileInputs.cache
+D:\BAITAP\BT_LTWEB\CoCaro\Library_CoCaro\obj\Debug\Library_CoCaro.dll
+D:\BAITAP\BT_LTWEB\CoCaro\Library_CoCaro\obj\Debug\Library_CoCaro.pdb
